@@ -1,6 +1,7 @@
 # prmdg
 
-[![Build Status](https://travis-ci.org/achiku/prmdg.svg?branch=master)](https://travis-ci.org/achiku/prmdg)
+[![Build Status](https://github.com/kanmu/prmdg/actions/workflows/test.yml/badge.svg)](https://github.com/kanmu/prmdg/actions/workflows/test.yml)
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/achiku/prmdg/master/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/achiku/prmdg)](https://goreportcard.com/report/github.com/achiku/prmdg)
 
