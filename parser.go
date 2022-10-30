@@ -11,6 +11,9 @@ import (
 	schema "github.com/lestrrat-go/jsschema"
 	"github.com/lestrrat-go/jsval"
 	"github.com/pkg/errors"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // PropType proper type
@@ -47,14 +50,6 @@ func resolveSchema(sch *schema.Schema, root *schema.Schema) (*schema.Schema, err
 	}
 	// FIXME: recursively resolving schema. may need to limit # of recursion.
 	return resolveSchema(sh, root)
-}
-
-func typesToStrings(types schema.PrimitiveTypes) []string {
-	var vals []string
-	for _, tt := range types {
-		vals = append(vals, tt.String())
-	}
-	return vals
 }
 
 func sortProperties(props []*Property) []*Property {
@@ -394,7 +389,7 @@ func (p *Parser) ParseJsValValidators() ([]*jsval.JSVal, error) {
 				}
 			}
 			v.Name = varfmt.PublicVarName(
-				strings.Replace(id+strings.Title(e.Rel), "-", "_", -1) + "Validator")
+				strings.Replace(id+cases.Title(language.Und).String(e.Rel), "-", "_", -1) + "Validator")
 			validators = append(validators, v)
 		}
 	}

@@ -9,6 +9,7 @@ require (
 	github.com/lestrrat-go/jsschema v0.0.0-20181205002244-5c81c58ffcc3
 	github.com/lestrrat-go/jsval v0.0.0-20181205002323-20277e9befc0
 	github.com/pkg/errors v0.8.2-0.20190217225212-856c240a51a2
+	golang.org/x/text v0.4.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
 

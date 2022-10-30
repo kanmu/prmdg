@@ -1,14 +1,14 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
 	"testing"
 )
 
 func TestGenerateStructFile(t *testing.T) {
 	pkg := "taskyapi"
-	op := ioutil.Discard
+	op := io.Discard
 	cases := []struct {
 		Validator bool
 		UseTitle  bool
@@ -37,7 +37,7 @@ func TestGenerateJsValValidatorFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer fp.Close()
-	op := ioutil.Discard
+	op := io.Discard
 	if err := generateJsValValidatorFile(&pkg, fp, op); err != nil {
 		t.Fatal(err)
 	}
@@ -50,7 +50,7 @@ func TestGenerateValidatorFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer fp.Close()
-	op := ioutil.Discard
+	op := io.Discard
 	if err := generateValidatorFile(&pkg, fp, op); err != nil {
 		t.Fatal(err)
 	}

@@ -88,7 +88,7 @@ func (val Validator) ValidatorFunc() string {
 		return {{ .RegexpVarName }}.MatchString(fl.Field().String())
 	}`)
 	var src bytes.Buffer
-	tmpl.Execute(&src, val)
+	tmpl.Execute(&src, val) //nolint:errcheck
 	return src.String()
 }
 
@@ -100,6 +100,6 @@ func (val Validator) RegisterFunc() string {
 		log.Fatal(err)
 	}`)
 	var src bytes.Buffer
-	tmpl.Execute(&src, val)
+	tmpl.Execute(&src, val) //nolint:errcheck
 	return src.String()
 }

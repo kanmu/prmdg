@@ -17,10 +17,6 @@ import (
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
 
-const (
-	version = "0.0.1"
-)
-
 var (
 	app = kingpin.New("prmdg", "prmd generated JSON Hyper Schema to Go")
 	pkg = app.Flag("package", "package name for Go file").Default("main").Short('p').String()
@@ -36,7 +32,12 @@ var (
 	scValidator = structCmd.Flag("validate-tag", "add `validate` tag to struct").Bool()
 	scUseTitle  = structCmd.Flag("use-title", "use title tag in request/response struct name").Bool()
 	scNullable  = structCmd.Flag("nullable", "use github.com/guregu/null for null value").Bool()
+	version     string
 )
+
+func init() {
+	kingpin.Version(version)
+}
 
 func main() {
 	cmd := kingpin.MustParse(app.Parse(os.Args[1:]))
