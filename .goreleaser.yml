@@ -1,0 +1,34 @@
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - ldflags:
+      - -X main.version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+checksum:
+  name_template: "checksums.txt"
+brews:
+  - tap:
+      owner: kanmu
+      name: homebrew-tools
+    homepage: https://github.com/kanmu/prmdg
+    description: prmd style JSON Hyper Schema to Go structs, and validators
+    license: MIT
+    install: |
+      bin.install 'prmdg'
+nfpms:
+  - id: prmdg-nfpms
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Arch }}"
+    homepage: https://github.com/kanmu/prmdg
+    maintainer: Akira Chiku <akira.chiku@gmail.com>
+    description: prmd style JSON Hyper Schema to Go structs, and validators
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
