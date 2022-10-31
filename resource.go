@@ -8,6 +8,8 @@ import (
 
 	"github.com/achiku/varfmt"
 	schema "github.com/lestrrat-go/jsschema"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // Resource plain resource
@@ -255,7 +257,7 @@ func (a *Action) RequestStruct(op FormatOption) []byte {
 		n = a.Rel
 	}
 	name := varfmt.PublicVarName(
-		normalize(a.Response.Name+strings.Title(n)) + "Request")
+		normalize(a.Response.Name+cases.Title(language.Und).String(n)) + "Request")
 
 	var src bytes.Buffer
 	fmt.Fprintf(&src, "// %s struct for %s\n", name, a.Request.Name)
@@ -280,7 +282,7 @@ func (a *Action) ResponseStruct(op FormatOption) []byte {
 		n = a.Rel
 	}
 	name := varfmt.PublicVarName(
-		normalize(a.Response.Name+strings.Title(n)) + "Response")
+		normalize(a.Response.Name+cases.Title(language.Und).String(n)) + "Response")
 	orgName := varfmt.PublicVarName(normalize(a.Response.Name))
 
 	var src bytes.Buffer

@@ -96,30 +96,30 @@ func TestResourceStruct(t *testing.T) {
 		Name:  "task",
 		Title: "Task resource",
 		Properties: []*Property{
-			&Property{
+			{
 				Name:     "id",
 				Types:    []schema.PrimitiveType{schema.IntegerType},
 				Format:   "",
 				Required: true,
 			},
-			&Property{
+			{
 				Name:     "spent",
 				Types:    []schema.PrimitiveType{schema.IntegerType},
 				Required: true,
 			},
-			&Property{
+			{
 				Name:     "title",
 				Types:    []schema.PrimitiveType{schema.StringType},
 				Format:   "",
 				Required: true,
 			},
-			&Property{
+			{
 				Name:     "createdAt",
 				Types:    []schema.PrimitiveType{schema.StringType},
 				Format:   "date-time",
 				Required: true,
 			},
-			&Property{
+			{
 				Name:     "completedAt",
 				Types:    []schema.PrimitiveType{schema.StringType},
 				Format:   "date-time",
