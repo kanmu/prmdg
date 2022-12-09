@@ -2,8 +2,8 @@
 
 [![Build Status](https://github.com/kanmu/prmdg/actions/workflows/test.yml/badge.svg)](https://github.com/kanmu/prmdg/actions/workflows/test.yml)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/achiku/prmdg/master/LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/achiku/prmdg)](https://goreportcard.com/report/github.com/achiku/prmdg)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kanmu/prmdg/master/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kanmu/prmdg)](https://goreportcard.com/report/github.com/kanmu/prmdg)
 
 prmd style JSON Hyper Schema to Go structs, and validators
 
