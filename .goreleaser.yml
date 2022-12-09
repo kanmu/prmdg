@@ -25,7 +25,7 @@ nfpms:
   - id: prmdg-nfpms
     file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Arch }}"
     homepage: https://github.com/kanmu/prmdg
-    maintainer: Akira Chiku <akira.chiku@gmail.com>
+    maintainer: Kanmu, Inc. <develop@kanmu.co.jp>
     description: prmd style JSON Hyper Schema to Go structs, and validators
     license: MIT
     formats:
