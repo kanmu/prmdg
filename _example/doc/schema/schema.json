@@ -87,6 +87,76 @@
         "detail"
       ]
     },
+    "misc": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Misc",
+      "description": "Misc",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "misc id",
+          "example": "ec0a1edc-062e-11e7-8b1e-040ccee2aa06",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Register bool value",
+          "href": "/bool/register",
+          "title": "detail",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "bool": {
+                "description": "bool",
+                "example": true,
+                "type": [
+                  "boolean"
+                ]
+              }
+            },
+            "required": [
+              "bool"
+            ]
+          },
+          "targetSchema": {
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/misc/definitions/id"
+              },
+              "isTrue": {
+                "description": "isTrue",
+                "example": true,
+                "type": [
+                  "boolean"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "isTrue"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/user/definitions/id"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "task": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Task",
@@ -352,6 +422,9 @@
   "properties": {
     "error": {
       "$ref": "#/definitions/error"
+    },
+    "misc": {
+      "$ref": "#/definitions/misc"
     },
     "task": {
       "$ref": "#/definitions/task"
