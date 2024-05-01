@@ -24,6 +24,8 @@ Tasky-App-Version 1.0.0
 ## The table of contents
 
 - <a href="#resource-error">Error</a>
+- <a href="#resource-misc">Misc</a>
+  - <a href="#link-POST-misc-/bool/register">POST /bool/register</a>
 - <a href="#resource-task">Task</a>
   - <a href="#link-GET-task-/tasks/{(%23%2Fdefinitions%2Ftask%2Fdefinitions%2Fidentity)}">GET /tasks/{task_id}</a>
   - <a href="#link-POST-task-/tasks">POST /tasks</a>
@@ -45,6 +47,59 @@ This resource represents API error
 | **detail** | *string* | error detail | `"invalid param"` |
 | **errorFields/message** | *string* | error message for invalid param field | `"invalid status"` |
 | **errorFields/name** | *string* | param field name | `"status"` |
+
+
+## <a name="resource-misc">Misc</a>
+
+Stability: `prototype`
+
+Misc
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **[id](#resource-user)** | *uuid* | user id | `"ec0a1edc-062e-11e7-8b1e-040ccee2aa06"` |
+
+### <a name="link-POST-misc-/bool/register">Misc detail</a>
+
+Register bool value
+
+```
+POST /bool/register
+```
+
+#### Required Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **bool** | *boolean* | bool | `true` |
+
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST https://tasky.io/v1/bool/register \
+  -d '{
+  "bool": true
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 201 Created
+```
+
+```json
+{
+  "id": "ec0a1edc-062e-11e7-8b1e-040ccee2aa06",
+  "isTrue": true
+}
+```
 
 
 ## <a name="resource-task">Task</a>

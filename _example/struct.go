@@ -12,6 +12,11 @@ type Error struct {
 	} `json:"errorFields,omitempty"`
 }
 
+// Misc struct for misc resource
+type Misc struct {
+	ID string `json:"id"`
+}
+
 // Task struct for task resource
 type Task struct {
 	CompletedAt time.Time `json:"completedAt"`
@@ -30,6 +35,16 @@ type User struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
+
+// MiscCreateRequest struct for misc
+// POST: /bool/register
+type MiscCreateRequest struct {
+	Bool bool `json:"bool,omitempty"`
+}
+
+// MiscCreateResponse struct for misc
+// POST: /bool/register
+type MiscCreateResponse Misc
 
 // TaskInstancesRequest struct for task
 // GET: /tasks
