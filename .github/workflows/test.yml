@@ -14,15 +14,23 @@ jobs:
 
     steps:
       - name: Install Go
-        uses: actions/setup-go/@v2
+        uses: actions/setup-go/@v5
         with:
           go-version: ${{ matrix.go }}
 
       - name: Checkout code
-        uses: actions/checkout/@v3
+        uses: actions/checkout/@v4
 
       - name: Lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v5
 
       - name: Run test
         run: go test -v
+
+      - name: Check diff
+        run: |
+          cd _example
+          sed -i'' -e 's/prmdg/go run ../' ./gen.go
+          go generate .
+          git restore HEAD ./gen.go
+          git diff --exit-code
