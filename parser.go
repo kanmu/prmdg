@@ -67,6 +67,15 @@ func sortProperties(props []*Property) []*Property {
 	for _, n := range names {
 		sorted = append(sorted, pMap[n])
 	}
+
+	// In case the top level property contains another property internally,
+	// sort them recursively.
+	for _, p := range sorted {
+		if p.InlineProperties != nil {
+			p.InlineProperties = sortProperties(p.InlineProperties)
+		}
+	}
+
 	return sorted
 }
 
