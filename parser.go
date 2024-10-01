@@ -261,7 +261,6 @@ func (p *Parser) ParseResources() (map[string]Resource, error) {
 			if err != nil {
 				return nil, errors.Wrapf(err, "failed to parse %s", id)
 			}
-			fld.InlineProperties = sortProperties(fld.InlineProperties)
 			flds = append(flds, fld)
 		}
 		rs.Properties = sortProperties(flds)
