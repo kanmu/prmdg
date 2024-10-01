@@ -32,7 +32,7 @@ func TestRefToStructName(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		t.Logf(c.Prop.refToStructName())
+		t.Logf("%v", c.Prop.refToStructName())
 	}
 }
 
