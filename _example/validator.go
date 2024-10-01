@@ -2,7 +2,6 @@ package taskyapi
 
 import "github.com/lestrrat-go/jsval"
 
-var MiscCreateValidator *jsval.JSVal
 var TaskCreateValidator *jsval.JSVal
 var TaskInstancesValidator *jsval.JSVal
 var TaskSelfValidator *jsval.JSVal
@@ -23,21 +22,6 @@ func init() {
 	R1 = jsval.String()
 	M.SetReference("#/definitions/task/definitions/tags", R0)
 	M.SetReference("#/definitions/task/definitions/title", R1)
-	MiscCreateValidator = jsval.New().
-		SetName("MiscCreateValidator").
-		SetConstraintMap(M).
-		SetRoot(
-			jsval.Object().
-				Required("bool").
-				AdditionalProperties(
-					jsval.EmptyConstraint,
-				).
-				AddProp(
-					"bool",
-					jsval.Boolean(),
-				),
-		)
-
 	TaskCreateValidator = jsval.New().
 		SetName("TaskCreateValidator").
 		SetConstraintMap(M).

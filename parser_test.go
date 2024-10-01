@@ -68,37 +68,3 @@ func TestParseActions(t *testing.T) {
 		}
 	}
 }
-
-func TestParseActions_SchemaRequired(t *testing.T) {
-	parser := testNewParser(t)
-	r, err := parser.ParseResources()
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	res, err := parser.ParseActions(r)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	a := res["misc"][0]
-	if a.Href != "/bool/register" {
-		t.Fatalf("href is not /bool/register, %s", a.Href)
-	}
-
-	name := a.Request.Properties[0]
-	if name.Name != "bool" {
-		t.Fatalf("not a target: %s", name.Name)
-	}
-	if !name.Required {
-		t.Fatal("bool is required")
-	}
-
-	isTrue := a.Response.Properties[1]
-	if isTrue.Name != "isTrue" {
-		t.Fatalf("not a target: %s", isTrue.Name)
-	}
-	if !isTrue.Required {
-		t.Fatal("isTrue is required")
-	}
-}
