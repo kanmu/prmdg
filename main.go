@@ -18,10 +18,11 @@ import (
 )
 
 var (
-	app = kingpin.New("prmdg", "prmd generated JSON Hyper Schema to Go")
-	pkg = app.Flag("package", "package name for Go file").Default("main").Short('p').String()
-	fp  = app.Flag("file", "path JSON Schema").Required().Short('f').String()
-	op  = app.Flag("output", "path to Go output file").Short('o').String()
+	app       = kingpin.New("prmdg", "prmd generated JSON Hyper Schema to Go")
+	pkg       = app.Flag("package", "package name for Go file").Default("main").Short('p').String()
+	fp        = app.Flag("file", "path JSON Schema").Required().Short('f').String()
+	op        = app.Flag("output", "path to Go output file").Short('o').String()
+	useGoTool = app.Flag("use-go-tool", "use 'go tool' for goimports").Bool()
 
 	structCmd = app.Command("struct", "generate struct file")
 	jsValCmd  = app.Command(
@@ -76,8 +77,12 @@ func main() {
 	}
 
 	if *op != "" {
+		cmd := "goimports"
+		if *useGoTool {
+			cmd = "go tool goimports"
+		}
 		params := []string{"-w", *op}
-		if err := exec.Command("goimports", params...).Run(); err != nil {
+		if err := exec.Command(cmd, params...).Run(); err != nil {
 			app.Errorf("failed to goimports: %s", err)
 		}
 	}

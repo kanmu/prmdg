@@ -36,6 +36,7 @@ Flags:
   -p, --package="main"  package name for Go file
   -f, --file=FILE       path JSON Schema
   -o, --output=OUTPUT   path to Go output file
+      --use-go-tool     use 'go tool' for goimports
 
 Commands:
   help [<command>...]
