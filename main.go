@@ -77,12 +77,15 @@ func main() {
 	}
 
 	if *op != "" {
-		cmd := "goimports"
+		var cmd *exec.Cmd
 		if *useGoTool {
-			cmd = "go tool goimports"
+			params := []string{"tool", "goimports", "-w", *op}
+			cmd = exec.Command("go", params...)
+		} else {
+			params := []string{"-w", *op}
+			cmd = exec.Command("goimports", params...)
 		}
-		params := []string{"-w", *op}
-		if err := exec.Command(cmd, params...).Run(); err != nil {
+		if err := cmd.Run(); err != nil {
 			app.Errorf("failed to goimports: %s", err)
 		}
 	}
