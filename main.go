@@ -77,7 +77,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("failed to goimports: %s", err)
 		}
-		err := os.WriteFile(*op, buf, 0666)
+		err = os.WriteFile(*op, buf, 0666)
 		if err != nil {
 			app.Errorf("failed to create output file %s: %s", *op, err)
 		}
