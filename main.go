@@ -7,22 +7,20 @@ import (
 	"io"
 	"log"
 	"os"
-	"os/exec"
 	"sort"
 
 	schema "github.com/lestrrat-go/jsschema"
 	"github.com/lestrrat-go/jsval"
 	"github.com/pkg/errors"
-
+	"golang.org/x/tools/imports"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
-	app       = kingpin.New("prmdg", "prmd generated JSON Hyper Schema to Go")
-	pkg       = app.Flag("package", "package name for Go file").Default("main").Short('p').String()
-	fp        = app.Flag("file", "path JSON Schema").Required().Short('f').String()
-	op        = app.Flag("output", "path to Go output file").Short('o').String()
-	useGoTool = app.Flag("use-go-tool", "use 'go tool' for goimports").Bool()
+	app = kingpin.New("prmdg", "prmd generated JSON Hyper Schema to Go")
+	pkg = app.Flag("package", "package name for Go file").Default("main").Short('p').String()
+	fp  = app.Flag("file", "path JSON Schema").Required().Short('f').String()
+	op  = app.Flag("output", "path to Go output file").Short('o').String()
 
 	structCmd = app.Command("struct", "generate struct file")
 	jsValCmd  = app.Command(
@@ -49,10 +47,7 @@ func main() {
 		err error
 	)
 	if *op != "" {
-		out, err = os.Create(*op)
-		if err != nil {
-			app.Errorf("failed to create output file %s: %s", *op, err)
-		}
+		out = &bytes.Buffer{}
 	} else {
 		out = os.Stdout
 	}
@@ -77,16 +72,14 @@ func main() {
 	}
 
 	if *op != "" {
-		var cmd *exec.Cmd
-		if *useGoTool {
-			params := []string{"tool", "goimports", "-w", *op}
-			cmd = exec.Command("go", params...)
-		} else {
-			params := []string{"-w", *op}
-			cmd = exec.Command("goimports", params...)
-		}
-		if err := cmd.Run(); err != nil {
+		buf := out.(*bytes.Buffer).Bytes()
+		buf, err := imports.Process(*op, buf, nil)
+		if err != nil {
 			app.Errorf("failed to goimports: %s", err)
+		}
+		err = os.WriteFile(*op, buf, 0666)
+		if err != nil {
+			app.Errorf("failed to create output file %s: %s", *op, err)
 		}
 	}
 }

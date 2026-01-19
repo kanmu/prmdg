@@ -10,6 +10,7 @@ require (
 	github.com/lestrrat-go/jsval v0.0.0-20181205002323-20277e9befc0
 	github.com/pkg/errors v0.8.2-0.20190217225212-856c240a51a2
 	golang.org/x/text v0.4.0
+	golang.org/x/tools v0.1.12
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
 
@@ -23,4 +24,6 @@ require (
 	github.com/lestrrat-go/structinfo v0.0.0-20190212233437-acd51874663b // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
+	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
+	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
 )
