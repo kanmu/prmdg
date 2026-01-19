@@ -73,9 +73,9 @@ func main() {
 
 	if *op != "" {
 		buf := out.(*bytes.Buffer).Bytes()
-		buf, err = imports.Process(*op, buf, nil)
+		buf, err := imports.Process(*op, buf, nil)
 		if err != nil {
-			log.Fatalf("failed to goimports: %s", err)
+			app.Errorf("failed to goimports: %s", err)
 		}
 		err = os.WriteFile(*op, buf, 0666)
 		if err != nil {
