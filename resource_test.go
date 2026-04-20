@@ -135,3 +135,36 @@ func TestResourceStruct(t *testing.T) {
 	}
 	t.Logf("%s", ss)
 }
+
+func TestEmptyObjectPropertyField(t *testing.T) {
+	cases := []struct {
+		Prop     Property
+		Expected string
+	}{
+		{
+			Prop: Property{
+				Name:     "options",
+				Types:    []schema.PrimitiveType{schema.ObjectType},
+				PropType: PropTypeObject,
+				Required: true,
+			},
+			Expected: "Options interface{} `json:\"options\" schema:\"options\"`",
+		},
+		{
+			Prop: Property{
+				Name:     "metadata",
+				Types:    []schema.PrimitiveType{schema.ObjectType},
+				PropType: PropTypeObject,
+				Required: false,
+			},
+			Expected: "Metadata interface{} `json:\"metadata,omitempty\" schema:\"metadata\"`",
+		},
+	}
+
+	for _, c := range cases {
+		result := string(c.Prop.Field(FormatOption{Schema: true}))
+		if result != c.Expected {
+			t.Errorf("expected %q, got %q", c.Expected, result)
+		}
+	}
+}
