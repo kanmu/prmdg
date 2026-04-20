@@ -143,19 +143,24 @@ func TestEmptyObjectPropertyField(t *testing.T) {
 	}{
 		{
 			Prop: Property{
-				Name:     "options",
-				Types:    []schema.PrimitiveType{schema.ObjectType},
-				PropType: PropTypeObject,
-				Required: true,
+				Name:  "options",
+				Types: []schema.PrimitiveType{schema.ObjectType},
+				// PropType: PropTypeObject は parser.go が実際に設定する値を再現している。
+				// Field() の分岐は pr.Types.Contains(schema.ObjectType) で決まるため、
+				// 動作に必須なのは Types フィールドへの schema.ObjectType の指定である。
+				PropType:         PropTypeObject,
+				Required:         true,
+				InlineProperties: nil, // properties なし → interface{} を生成
 			},
 			Expected: "Options interface{} `json:\"options\" schema:\"options\"`",
 		},
 		{
 			Prop: Property{
-				Name:     "metadata",
-				Types:    []schema.PrimitiveType{schema.ObjectType},
-				PropType: PropTypeObject,
-				Required: false,
+				Name:             "metadata",
+				Types:            []schema.PrimitiveType{schema.ObjectType},
+				PropType:         PropTypeObject,
+				Required:         false,
+				InlineProperties: nil, // properties なし → interface{} を生成
 			},
 			Expected: "Metadata interface{} `json:\"metadata,omitempty\" schema:\"metadata\"`",
 		},
