@@ -148,7 +148,11 @@ func (pr *Property) Field(op FormatOption) []byte {
 		t = fmt.Sprintf("*%s", varfmt.PublicVarName(normalize(pr.refToStructName())))
 	case pr.Types.Contains(schema.ObjectType) && !pr.IsRefToMainResource():
 		// inline object
-		t = pr.inlineOjbect(op)
+		if len(pr.InlineProperties) == 0 {
+			t = "interface{}"
+		} else {
+			t = pr.inlineOjbect(op)
+		}
 	}
 	if !pr.Required {
 		empty = ",omitempty"
